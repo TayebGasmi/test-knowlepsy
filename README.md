@@ -106,13 +106,13 @@ The frontend will be available at `http://localhost:5173` and the backend at `ht
 #### Individual Workspace Commands
 ```bash
 # Backend specific commands
-pnpm --filter backend dev
-pnpm --filter backend test
-pnpm --filter backend build
+pnpm --filter event-management-backend dev
+pnpm --filter event-management-backend test
+pnpm --filter event-management-backend build
 
 # Frontend specific commands  
-pnpm --filter frontend dev
-pnpm --filter frontend build
+pnpm --filter event-management-frontend dev
+pnpm --filter event-management-frontend build
 ```
 
 ## Project Structure
