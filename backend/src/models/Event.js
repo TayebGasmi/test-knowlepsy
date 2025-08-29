@@ -47,15 +47,15 @@ const eventSchema = new mongoose.Schema({
   timestamps: true
 });
 
-eventSchema.index({ date: 1 });
-eventSchema.index({ location: 1 });
-eventSchema.index({ organizer: 1 });
-eventSchema.index({ title: 'text', description: 'text' });
+eventSchema.index({date: 1});
+eventSchema.index({location: 1});
+eventSchema.index({organizer: 1});
+eventSchema.index({title: 'text', description: 'text'});
 
-eventSchema.virtual('availableSpots').get(function() {
+eventSchema.virtual('availableSpots').get(function () {
   return this.capacity - this.attendees.length;
 });
 
-eventSchema.set('toJSON', { virtuals: true });
+eventSchema.set('toJSON', {virtuals: true});
 
 module.exports = mongoose.model('Event', eventSchema);

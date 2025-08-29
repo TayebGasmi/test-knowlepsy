@@ -1,6 +1,7 @@
 # Event Management Application
 
-A fullstack monorepo web application for event management built with React.js, TypeScript, Node.js, Express, and MongoDB. Managed with pnpm workspaces for efficient dependency management.
+A fullstack monorepo web application for event management built with React.js, TypeScript, Node.js, Express, and MongoDB. Managed with pnpm workspaces for
+efficient dependency management.
 
 ## Features
 
@@ -16,6 +17,7 @@ A fullstack monorepo web application for event management built with React.js, T
 ## Tech Stack
 
 ### Frontend
+
 - **React 18** with functional components and hooks
 - **TypeScript** for type safety
 - **Redux Toolkit** with RTK Query for state management
@@ -26,6 +28,7 @@ A fullstack monorepo web application for event management built with React.js, T
 - **Vite** for fast development and building
 
 ### Backend
+
 - **Node.js** with Express
 - **MongoDB** with Mongoose ODM
 - **JWT authentication** with secure token management
@@ -36,6 +39,7 @@ A fullstack monorepo web application for event management built with React.js, T
 ## Getting Started
 
 ### Prerequisites
+
 - **Node.js 18+**
 - **pnpm** (recommended) or npm
 - **Docker and Docker Compose**
@@ -80,6 +84,7 @@ A fullstack monorepo web application for event management built with React.js, T
 ### Alternative Setup with npm
 
 If you prefer using npm:
+
 ```bash
 npm install
 npm run docker:up
@@ -91,19 +96,23 @@ The frontend will be available at `http://localhost:5173` and the backend at `ht
 ### Available Scripts
 
 #### Development
+
 - `pnpm run dev` - Start both frontend and backend in development mode
 - `pnpm run dev:backend` - Start only the backend server
 - `pnpm run dev:frontend` - Start only the frontend development server
 
 #### Building & Testing
+
 - `pnpm run build` - Build both applications for production
 - `pnpm run test` - Run backend tests with Jest
 
 #### Database Management
+
 - `pnpm run docker:up` - Start MongoDB container
 - `pnpm run docker:down` - Stop MongoDB container
 
 #### Individual Workspace Commands
+
 ```bash
 # Backend specific commands
 pnpm --filter event-management-backend dev
@@ -158,10 +167,12 @@ event-management/
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/signup` - User registration
 - `POST /api/auth/login` - User login
 
 ### Events
+
 - `GET /api/events` - Get all events (with optional filters)
 - `POST /api/events` - Create new event
 - `DELETE /api/events/:id` - Delete event
@@ -169,6 +180,7 @@ event-management/
 ## Environment Variables
 
 ### Backend (`backend/.env`)
+
 ```env
 NODE_ENV=development
 PORT=3000
@@ -178,6 +190,7 @@ JWT_EXPIRES_IN=7d
 ```
 
 ### Frontend (`frontend/.env`)
+
 ```env
 VITE_API_URL=http://localhost:3000
 ```
@@ -185,12 +198,14 @@ VITE_API_URL=http://localhost:3000
 ## Key Features Explained
 
 ### 🔐 Authentication System
+
 - **JWT-based authentication** with secure token storage
 - **Protected routes** that redirect unauthenticated users
 - **User registration and login** with form validation
 - **Automatic token refresh** handling
 
 ### 📅 Event Management
+
 - **Create events** with title, description, date, location, and capacity
 - **View event details** with organizer information and attendee lists
 - **Delete events** (only by organizers)
@@ -198,11 +213,13 @@ VITE_API_URL=http://localhost:3000
 - **Pagination** for large event lists
 
 ### 📊 Dashboard & Analytics
+
 - **Statistics overview** showing total events, upcoming events, past events, and total attendees
 - **Interactive charts** displaying events by month using Recharts
 - **Recent events** quick access
 
 ### 🎨 User Experience
+
 - **Dark/Light mode** toggle with system preference detection
 - **Responsive design** that works on all devices
 - **Loading states** and error handling throughout the app
@@ -212,16 +229,19 @@ VITE_API_URL=http://localhost:3000
 ## Development Notes
 
 ### TypeScript Integration
+
 - **Full TypeScript support** in the frontend with strict type checking
 - **Type-safe Redux** with proper typing for state and actions
 - **Form validation** with Zod schemas shared between frontend and backend
 
 ### Performance Optimizations
+
 - **Code splitting** with React Router lazy loading
 - **Optimized Redux** with RTK Query for efficient data fetching
 - **Vite** for fast development builds and HMR
 
 ### Testing Strategy
+
 - **Backend testing** with Jest and Supertest
 - **API endpoint testing** with full database integration
 - **Authentication flow testing** with JWT token validation

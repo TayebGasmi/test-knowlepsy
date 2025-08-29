@@ -1,7 +1,7 @@
 const express = require('express');
 const eventController = require('../controllers/eventController');
-const { authenticate } = require('../middleware/auth');
-const { validateRequest, validateQuery, eventSchema, eventQuerySchema } = require('../utils/validation');
+const {authenticate} = require('../middleware/auth');
+const {validateRequest, validateQuery, eventSchema, eventQuerySchema} = require('../utils/validation');
 
 const router = express.Router();
 

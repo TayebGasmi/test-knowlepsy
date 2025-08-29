@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { authApi } from '../api/authApi'
+import {createSlice} from '@reduxjs/toolkit'
+import {authApi} from '../api/authApi'
 
 const initialState = {
   user: null,
@@ -26,7 +26,7 @@ const authSlice = createSlice({
       }
     },
     setCredentials: (state, action) => {
-      const { user, token } = action.payload
+      const {user, token} = action.payload
       state.user = user
       state.token = token
       state.isAuthenticated = true
@@ -35,39 +35,39 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(authApi.endpoints.login.matchPending, (state) => {
-        state.loading = true
-      })
-      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
-        state.loading = false
-        const { user, token } = action.payload.data
-        state.user = user
-        state.token = token
-        state.isAuthenticated = true
-        localStorage.setItem('token', token)
-      })
-      .addMatcher(authApi.endpoints.login.matchRejected, (state) => {
-        state.loading = false
-      })
-      .addMatcher(authApi.endpoints.signup.matchPending, (state) => {
-        state.loading = true
-      })
-      .addMatcher(authApi.endpoints.signup.matchFulfilled, (state, action) => {
-        state.loading = false
-        const { user, token } = action.payload.data
-        state.user = user
-        state.token = token
-        state.isAuthenticated = true
-        localStorage.setItem('token', token)
-      })
-      .addMatcher(authApi.endpoints.signup.matchRejected, (state) => {
-        state.loading = false
-      })
-      .addMatcher(authApi.endpoints.getProfile.matchFulfilled, (state, action) => {
-        state.user = action.payload.data.user
-      })
+    .addMatcher(authApi.endpoints.login.matchPending, (state) => {
+      state.loading = true
+    })
+    .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
+      state.loading = false
+      const {user, token} = action.payload.data
+      state.user = user
+      state.token = token
+      state.isAuthenticated = true
+      localStorage.setItem('token', token)
+    })
+    .addMatcher(authApi.endpoints.login.matchRejected, (state) => {
+      state.loading = false
+    })
+    .addMatcher(authApi.endpoints.signup.matchPending, (state) => {
+      state.loading = true
+    })
+    .addMatcher(authApi.endpoints.signup.matchFulfilled, (state, action) => {
+      state.loading = false
+      const {user, token} = action.payload.data
+      state.user = user
+      state.token = token
+      state.isAuthenticated = true
+      localStorage.setItem('token', token)
+    })
+    .addMatcher(authApi.endpoints.signup.matchRejected, (state) => {
+      state.loading = false
+    })
+    .addMatcher(authApi.endpoints.getProfile.matchFulfilled, (state, action) => {
+      state.user = action.payload.data.user
+    })
   },
 })
 
-export const { logout, checkAuth, setCredentials } = authSlice.actions
+export const {logout, checkAuth, setCredentials} = authSlice.actions
 export default authSlice.reducer

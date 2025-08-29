@@ -4,10 +4,10 @@ class EventController {
   async createEvent(req, res, next) {
     try {
       const event = await eventService.createEvent(req.body, req.user._id);
-      
+
       res.status(201).json({
         message: 'Event created successfully',
-        data: { event }
+        data: {event}
       });
     } catch (error) {
       next(error);
@@ -17,7 +17,7 @@ class EventController {
   async getEvents(req, res, next) {
     try {
       const result = await eventService.getEvents(req.query, req.user._id);
-      
+
       res.json({
         message: 'Events retrieved successfully',
         data: result
@@ -30,10 +30,10 @@ class EventController {
   async getEvent(req, res, next) {
     try {
       const event = await eventService.getEventById(req.params.id);
-      
+
       res.json({
         message: 'Event retrieved successfully',
-        data: { event }
+        data: {event}
       });
     } catch (error) {
       next(error);
@@ -43,7 +43,7 @@ class EventController {
   async deleteEvent(req, res, next) {
     try {
       const result = await eventService.deleteEvent(req.params.id, req.user._id);
-      
+
       res.json({
         message: 'Event deleted successfully',
         data: result
@@ -56,7 +56,7 @@ class EventController {
   async getEventStats(req, res, next) {
     try {
       const stats = await eventService.getEventStats(req.user._id);
-      
+
       res.json({
         message: 'Event statistics retrieved successfully',
         data: stats

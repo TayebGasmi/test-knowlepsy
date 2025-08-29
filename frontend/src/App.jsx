@@ -1,10 +1,9 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { Routes, Route } from 'react-router-dom'
+import {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 
-import { checkAuth } from './store/slices/authSlice'
-import { AppRouter } from './routes/AppRouter'
-import { Layout } from './components/Layout'
+import {checkAuth} from './store/slices/authSlice'
+import {AppRouter} from './routes/AppRouter'
+import {Layout} from './components/Layout'
 
 function App() {
   const dispatch = useDispatch()
@@ -14,9 +13,9 @@ function App() {
   }, [dispatch])
 
   return (
-    <Layout>
-      <AppRouter />
-    </Layout>
+      <Layout>
+        <AppRouter/>
+      </Layout>
   )
 }
 

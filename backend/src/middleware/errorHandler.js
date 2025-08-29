@@ -6,7 +6,7 @@ const errorHandler = (error, req, res, next) => {
       field: err.path,
       message: err.message
     }));
-    
+
     return res.status(400).json({
       message: 'Validation error',
       errors
@@ -17,14 +17,14 @@ const errorHandler = (error, req, res, next) => {
     const field = Object.keys(error.keyValue)[0];
     return res.status(400).json({
       message: `${field} already exists`,
-      errors: [{ field, message: `${field} already exists` }]
+      errors: [{field, message: `${field} already exists`}]
     });
   }
 
   if (error.name === 'CastError') {
     return res.status(400).json({
       message: 'Invalid ID format',
-      errors: [{ field: 'id', message: 'Invalid ID format' }]
+      errors: [{field: 'id', message: 'Invalid ID format'}]
     });
   }
 
@@ -45,7 +45,7 @@ const errorHandler = (error, req, res, next) => {
 
   res.status(statusCode).json({
     message,
-    ...(process.env.NODE_ENV === 'development' && { stack: error.stack })
+    ...(process.env.NODE_ENV === 'development' && {stack: error.stack})
   });
 };
 

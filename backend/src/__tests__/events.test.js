@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { generateToken } = require('../utils/jwt');
+const {generateToken} = require('../utils/jwt');
 
 describe('Event Endpoints', () => {
   let user;
@@ -15,8 +15,8 @@ describe('Event Endpoints', () => {
       password: 'password123'
     });
     await user.save();
-    
-    token = generateToken({ userId: user._id, email: user.email });
+
+    token = generateToken({userId: user._id, email: user.email});
   });
 
   describe('POST /api/events', () => {
@@ -30,10 +30,10 @@ describe('Event Endpoints', () => {
       };
 
       const response = await request(app)
-        .post('/api/events')
-        .set('Authorization', `Bearer ${token}`)
-        .send(eventData)
-        .expect(201);
+      .post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
+      .send(eventData)
+      .expect(201);
 
       expect(response.body.message).toBe('Event created successfully');
       expect(response.body.data.event.title).toBe(eventData.title);
@@ -49,9 +49,9 @@ describe('Event Endpoints', () => {
       };
 
       await request(app)
-        .post('/api/events')
-        .send(eventData)
-        .expect(401);
+      .post('/api/events')
+      .send(eventData)
+      .expect(401);
     });
 
     it('should not create event with past date', async () => {
@@ -64,10 +64,10 @@ describe('Event Endpoints', () => {
       };
 
       const response = await request(app)
-        .post('/api/events')
-        .set('Authorization', `Bearer ${token}`)
-        .send(eventData)
-        .expect(400);
+      .post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
+      .send(eventData)
+      .expect(400);
 
       expect(response.body.message).toBe('Validation error');
     });
@@ -99,9 +99,9 @@ describe('Event Endpoints', () => {
 
     it('should get all events', async () => {
       const response = await request(app)
-        .get('/api/events')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+      .get('/api/events')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
 
       expect(response.body.message).toBe('Events retrieved successfully');
       expect(response.body.data.events).toHaveLength(2);
@@ -110,9 +110,9 @@ describe('Event Endpoints', () => {
 
     it('should filter events by location', async () => {
       const response = await request(app)
-        .get('/api/events?location=Location 1')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+      .get('/api/events?location=Location 1')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
 
       expect(response.body.data.events).toHaveLength(1);
       expect(response.body.data.events[0].location).toBe('Location 1');
@@ -136,9 +136,9 @@ describe('Event Endpoints', () => {
 
     it('should delete own event', async () => {
       const response = await request(app)
-        .delete(`/api/events/${event._id}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+      .delete(`/api/events/${event._id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
 
       expect(response.body.message).toBe('Event deleted successfully');
 
@@ -148,11 +148,11 @@ describe('Event Endpoints', () => {
 
     it('should not delete non-existent event', async () => {
       const fakeId = '507f1f77bcf86cd799439011';
-      
+
       await request(app)
-        .delete(`/api/events/${fakeId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(404);
+      .delete(`/api/events/${fakeId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(404);
     });
   });
 });

@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { toggleTheme, setTheme } from '../store/slices/themeSlice'
+import {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {setTheme, toggleTheme} from '../store/slices/themeSlice'
 
 export const useTheme = () => {
   const theme = useSelector((state) => state.theme.theme)

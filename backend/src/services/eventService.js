@@ -10,7 +10,7 @@ class EventService {
 
     await event.save();
     await event.populate('organizer', 'name email');
-    
+
     return event;
   }
 
@@ -24,10 +24,10 @@ class EventService {
       search
     } = query;
 
-    const filter = { status: 'published' };
+    const filter = {status: 'published'};
 
     if (location) {
-      filter.location = { $regex: location, $options: 'i' };
+      filter.location = {$regex: location, $options: 'i'};
     }
 
     if (startDate || endDate) {
@@ -41,17 +41,17 @@ class EventService {
     }
 
     if (search) {
-      filter.$text = { $search: search };
+      filter.$text = {$search: search};
     }
 
     const skip = (page - 1) * limit;
 
     const [events, total] = await Promise.all([
       Event.find(filter)
-        .populate('organizer', 'name email')
-        .sort({ date: 1 })
-        .skip(skip)
-        .limit(limit),
+      .populate('organizer', 'name email')
+      .sort({date: 1})
+      .skip(skip)
+      .limit(limit),
       Event.countDocuments(filter)
     ]);
 
@@ -69,8 +69,8 @@ class EventService {
 
   async getEventById(eventId) {
     const event = await Event.findById(eventId)
-      .populate('organizer', 'name email')
-      .populate('attendees', 'name email');
+    .populate('organizer', 'name email')
+    .populate('attendees', 'name email');
 
     if (!event) {
       const error = new Error('Event not found');
@@ -97,39 +97,39 @@ class EventService {
     }
 
     await Event.findByIdAndDelete(eventId);
-    return { message: 'Event deleted successfully' };
+    return {message: 'Event deleted successfully'};
   }
 
   async getEventStats(userId) {
     const stats = await Event.aggregate([
-      { $match: { organizer: userId } },
+      {$match: {organizer: userId}},
       {
         $group: {
           _id: null,
-          totalEvents: { $sum: 1 },
-          totalAttendees: { $sum: { $size: '$attendees' } },
+          totalEvents: {$sum: 1},
+          totalAttendees: {$sum: {$size: '$attendees'}},
           upcomingEvents: {
-            $sum: { $cond: [{ $gt: ['$date', new Date()] }, 1, 0] }
+            $sum: {$cond: [{$gt: ['$date', new Date()]}, 1, 0]}
           },
           pastEvents: {
-            $sum: { $cond: [{ $lte: ['$date', new Date()] }, 1, 0] }
+            $sum: {$cond: [{$lte: ['$date', new Date()]}, 1, 0]}
           }
         }
       }
     ]);
 
     const eventsByMonth = await Event.aggregate([
-      { $match: { organizer: userId } },
+      {$match: {organizer: userId}},
       {
         $group: {
           _id: {
-            year: { $year: '$date' },
-            month: { $month: '$date' }
+            year: {$year: '$date'},
+            month: {$month: '$date'}
           },
-          count: { $sum: 1 }
+          count: {$sum: 1}
         }
       },
-      { $sort: { '_id.year': 1, '_id.month': 1 } }
+      {$sort: {'_id.year': 1, '_id.month': 1}}
     ]);
 
     return {

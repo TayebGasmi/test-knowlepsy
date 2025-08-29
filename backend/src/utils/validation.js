@@ -1,4 +1,4 @@
-const { z } = require('zod');
+const {z} = require('zod');
 
 const signupSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(50, 'Name must be less than 50 characters'),
@@ -42,7 +42,7 @@ const validateRequest = (schema) => {
         field: err.path.join('.'),
         message: err.message
       }));
-      
+
       return res.status(400).json({
         message: 'Validation error',
         errors: errorMessages
@@ -62,7 +62,7 @@ const validateQuery = (schema) => {
         field: err.path.join('.'),
         message: err.message
       }));
-      
+
       return res.status(400).json({
         message: 'Query validation error',
         errors: errorMessages

@@ -17,7 +17,7 @@ const connectDB = async () => {
 
 const startServer = async () => {
   await connectDB();
-  
+
   const server = app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV}`);
@@ -41,4 +41,4 @@ if (require.main === module) {
   startServer().catch(console.error);
 }
 
-module.exports = { app, startServer };
+module.exports = {app, startServer};

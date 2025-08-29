@@ -1,4 +1,4 @@
-export const LoadingSpinner = ({ size = 'medium', className = '' }) => {
+export const LoadingSpinner = ({size = 'medium', className = ''}) => {
   const sizeClasses = {
     small: 'h-4 w-4',
     medium: 'h-8 w-8',
@@ -6,12 +6,12 @@ export const LoadingSpinner = ({ size = 'medium', className = '' }) => {
   }
 
   return (
-    <div 
-      className={`loading-spinner ${sizeClasses[size]} ${className}`}
-      role="status"
-      aria-label="Loading"
-    >
-      <span className="sr-only">Loading...</span>
-    </div>
+      <div
+          className={`loading-spinner ${sizeClasses[size]} ${className}`}
+          role="status"
+          aria-label="Loading"
+      >
+        <span className="sr-only">Loading...</span>
+      </div>
   )
 }

@@ -12,9 +12,9 @@ describe('Auth Endpoints', () => {
       };
 
       const response = await request(app)
-        .post('/api/auth/signup')
-        .send(userData)
-        .expect(201);
+      .post('/api/auth/signup')
+      .send(userData)
+      .expect(201);
 
       expect(response.body.message).toBe('User created successfully');
       expect(response.body.data.user.email).toBe(userData.email);
@@ -29,9 +29,9 @@ describe('Auth Endpoints', () => {
       };
 
       const response = await request(app)
-        .post('/api/auth/signup')
-        .send(userData)
-        .expect(400);
+      .post('/api/auth/signup')
+      .send(userData)
+      .expect(400);
 
       expect(response.body.message).toBe('Validation error');
     });
@@ -46,9 +46,9 @@ describe('Auth Endpoints', () => {
       await User.create(userData);
 
       const response = await request(app)
-        .post('/api/auth/signup')
-        .send(userData)
-        .expect(400);
+      .post('/api/auth/signup')
+      .send(userData)
+      .expect(400);
 
       expect(response.body.message).toBe('User already exists with this email');
     });
@@ -71,9 +71,9 @@ describe('Auth Endpoints', () => {
       };
 
       const response = await request(app)
-        .post('/api/auth/login')
-        .send(loginData)
-        .expect(200);
+      .post('/api/auth/login')
+      .send(loginData)
+      .expect(200);
 
       expect(response.body.message).toBe('Login successful');
       expect(response.body.data.token).toBeDefined();
@@ -86,9 +86,9 @@ describe('Auth Endpoints', () => {
       };
 
       const response = await request(app)
-        .post('/api/auth/login')
-        .send(loginData)
-        .expect(401);
+      .post('/api/auth/login')
+      .send(loginData)
+      .expect(401);
 
       expect(response.body.message).toBe('Invalid email or password');
     });
